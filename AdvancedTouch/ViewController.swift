@@ -35,32 +35,30 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.blackColor()
         
+        // common
+        
+        for layer in layers
+        {
+            layer.lineCap = kCALineCapRound
+            layer.lineWidth = 2
+            layer.fillColor = nil
+            
+            view.layer.addSublayer(layer)
+        }
+        
         // mainDrawLayer
         
         mainDrawLayer.strokeColor = UIColor(red: 0.5, green: 0.5, blue: 1, alpha: 1).CGColor
-        mainDrawLayer.lineWidth = 2
-        mainDrawLayer.lineCap = kCALineCapRound
-        mainDrawLayer.fillColor = nil
-        
-        view.layer.addSublayer(mainDrawLayer)
         
         // coalescedDrawLayer
         
         coalescedDrawLayer.strokeColor = UIColor.yellowColor().CGColor
-        coalescedDrawLayer.lineWidth = 2
-        coalescedDrawLayer.lineCap = kCALineCapRound
-        coalescedDrawLayer.fillColor = nil
-        
-        view.layer.addSublayer(coalescedDrawLayer)
-        
+
         // predictedDrawLayer
         
         predictedDrawLayer.strokeColor = UIColor(white: 1, alpha: 0.95).CGColor
         predictedDrawLayer.lineWidth = 1
-        predictedDrawLayer.lineCap = kCALineCapRound
         predictedDrawLayer.fillColor = UIColor(white: 1, alpha: 0.75).CGColor
-        
-        view.layer.addSublayer(predictedDrawLayer)
     }
 
 
@@ -141,7 +139,7 @@ class ViewController: UIViewController {
         
         var foo = Double(1)
         
-        for bar in 0 ... 20_000_000
+        for bar in 0 ... 1_000_000
         {
             foo += sqrt(Double(bar))
         }
