@@ -66,6 +66,14 @@ class ViewController: UIViewController {
     {
         super.touchesBegan(touches, withEvent: event)
         
+        for (path, layer) in zip(paths, layers)
+        {
+            path.removeAllPoints()
+            
+            layer.path = path.CGPath
+            layer.hidden = false
+        }
+        
         guard let touch = touches.first else
         {
             return
@@ -152,13 +160,7 @@ class ViewController: UIViewController {
     {
         super.touchesEnded(touches, withEvent: event)
         
-        for (path, layer) in zip(paths, layers)
-        {
-            path.removeAllPoints()
-            
-            layer.path = path.CGPath
-            layer.hidden = false
-        }
+      
     }
 }
 

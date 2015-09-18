@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E33423D1BAC8AF20065C0D7 /* screenshot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E33423C1BAC8AF20065C0D7 /* screenshot.jpg */; settings = {ASSET_TAGS = (); }; };
 		3EECB12B1BAA923000F90C32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EECB12A1BAA923000F90C32 /* AppDelegate.swift */; };
 		3EECB12D1BAA923000F90C32 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EECB12C1BAA923000F90C32 /* ViewController.swift */; };
 		3EECB1301BAA923000F90C32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EECB12E1BAA923000F90C32 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E33423C1BAC8AF20065C0D7 /* screenshot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = screenshot.jpg; path = assets/screenshot.jpg; sourceTree = "<group>"; };
 		3EECB1271BAA923000F90C32 /* AdvancedTouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdvancedTouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EECB12A1BAA923000F90C32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3EECB12C1BAA923000F90C32 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E33423E1BAC8AFC0065C0D7 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				3E33423C1BAC8AF20065C0D7 /* screenshot.jpg */,
+			);
+			name = assets;
+			sourceTree = "<group>";
+		};
 		3EECB11E1BAA923000F90C32 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +107,7 @@
 		3EECB1291BAA923000F90C32 /* AdvancedTouch */ = {
 			isa = PBXGroup;
 			children = (
+				3E33423E1BAC8AFC0065C0D7 /* assets */,
 				3EECB12A1BAA923000F90C32 /* AppDelegate.swift */,
 				3EECB12C1BAA923000F90C32 /* ViewController.swift */,
 				3EECB12E1BAA923000F90C32 /* Main.storyboard */,
@@ -231,6 +242,7 @@
 				3EECB1351BAA923000F90C32 /* LaunchScreen.storyboard in Resources */,
 				3EECB1321BAA923000F90C32 /* Assets.xcassets in Resources */,
 				3EECB1301BAA923000F90C32 /* Main.storyboard in Resources */,
+				3E33423D1BAC8AF20065C0D7 /* screenshot.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +495,7 @@
 				3EECB1511BAA923000F90C32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3EECB1521BAA923000F90C32 /* Build configuration list for PBXNativeTarget "AdvancedTouchTests" */ = {
 			isa = XCConfigurationList;
@@ -491,6 +504,7 @@
 				3EECB1541BAA923000F90C32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3EECB1551BAA923000F90C32 /* Build configuration list for PBXNativeTarget "AdvancedTouchUITests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +513,7 @@
 				3EECB1571BAA923000F90C32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
