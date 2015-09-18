@@ -7,7 +7,7 @@ With the introduction of the iPad Pro, low latency, high resolution touch handli
 
 Luckily, with iOS 9, Apple have introduced some new functionality to UIEvent to reduce touch latency and improve temporal resolution. There's a demo application to go with with post that you can find at my GitHub repository here.
 
-Touch Coalescing
+###Touch Coalescing
 
 The first feature is touch coalescing. If your app is sampling touches with an overridden touchesMoved(), the most amount of touch samples you’ll get is 60 per second and, if your app is concerning itself with some fancy calculations on the main thread, it could well be less than that.
 
@@ -81,7 +81,7 @@ Here, I loop over those touches (I trace the number of touches to the console fo
 
 If you run this app on your iOS 9 device and scribble away you can see the two results: a jagged blue line and a beautifully smooth yellow line based on all those intermediate touch events that could have been missed. At each touch location, I add a small circle which clearly illustrates the increased resolution of the yellow curve based on the coalesced data.
 
-Predictive Touch
+###Predictive Touch
 
 Something maybe even cleverer is touch prediction which allows you to preempt where a user’s finger (or Apple Pencil) may be in the near future. Predictive touch uses some highly tuned algorithms and is continually updated with where iOS expects the users touch to be in approximately a frame in the future. This means you could begin preparing user interface components (e.g. beginning a fade or instantiating some objects) before they’re actually required to help reduce latency.
 
@@ -110,7 +110,7 @@ When you run the app, as you move your finger across the screen, the little pred
 
 You can see a few grey circles in the screen grab above which show two touches iOS predicted I would do to complete the spiral - that I never actually did! Spooky!
 
-Conclusion
+###Conclusion
 
 As users demand less latency and a higher touch resolution, touch coalescing and prediction allow our apps to support that. Whatever the framerate of our apps, we can respond to all of the user’s gestures and even preempt some of them!
 
