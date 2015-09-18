@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         // mainDrawLayer
         
         mainDrawLayer.strokeColor = UIColor(red: 0.5, green: 0.5, blue: 1, alpha: 1).CGColor
-        mainDrawLayer.lineWidth = 20
+        mainDrawLayer.lineWidth = 2
         mainDrawLayer.lineCap = kCALineCapRound
         mainDrawLayer.fillColor = nil
         
@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         // coalescedDrawLayer
         
         coalescedDrawLayer.strokeColor = UIColor.yellowColor().CGColor
-        coalescedDrawLayer.lineWidth = 10
+        coalescedDrawLayer.lineWidth = 2
         coalescedDrawLayer.lineCap = kCALineCapRound
         coalescedDrawLayer.fillColor = nil
         
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         // predictedDrawLayer
         
         predictedDrawLayer.strokeColor = UIColor(white: 1, alpha: 0.95).CGColor
-        predictedDrawLayer.lineWidth = 2
+        predictedDrawLayer.lineWidth = 1
         predictedDrawLayer.lineCap = kCALineCapRound
         predictedDrawLayer.fillColor = UIColor(white: 1, alpha: 0.75).CGColor
         
@@ -62,13 +62,17 @@ class ViewController: UIViewController {
             return
         }
         
-        mainDrawPath.moveToPoint(touch.locationInView(view))
-        coalescedDrawPath.moveToPoint(touch.locationInView(view))
-        predictedDrawPath.moveToPoint(touch.locationInView(view))
+        let locationInView = touch.locationInView(view)
         
-        coalescedDrawLayer.hidden = false
-        mainDrawLayer.hidden = false
-        predictedDrawLayer.hidden = false
+        for path in [mainDrawPath, coalescedDrawPath, predictedDrawPath]
+        {
+            path.moveToPoint(locationInView)
+        }
+        
+        for layer in [coalescedDrawLayer, mainDrawLayer, predictedDrawLayer]
+        {
+            layer.hidden = false
+        }
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?)
@@ -80,7 +84,12 @@ class ViewController: UIViewController {
             return
         }
         
-        mainDrawPath.addLineToPoint(touch.locationInView(view))
+        let locationInView = touch.locationInView(view)
+        
+        mainDrawPath.addLineToPoint(locationInView)
+        mainDrawPath.appendPath(ViewController.createCircleAtPoint(locationInView, radius: 4))
+        mainDrawPath.moveToPoint(locationInView)
+        
         mainDrawLayer.path = mainDrawPath.CGPath
         
         // draw coalescedTouches
@@ -91,7 +100,11 @@ class ViewController: UIViewController {
             
             for coalescedTouch in coalescedTouches
             {
-                coalescedDrawPath.addLineToPoint(coalescedTouch.locationInView(view))
+                let locationInView = coalescedTouch.locationInView(view)
+                
+                coalescedDrawPath.addLineToPoint(locationInView)
+                coalescedDrawPath.appendPath(ViewController.createCircleAtPoint(locationInView, radius: 2))
+                coalescedDrawPath.moveToPoint(locationInView)
             }
             
             coalescedDrawLayer.path = coalescedDrawPath.CGPath
@@ -107,9 +120,7 @@ class ViewController: UIViewController {
             {
                 let locationInView =  predictedTouch.locationInView(view)
                 
-                let circle = UIBezierPath(ovalInRect: CGRect(x: locationInView.x - 4, y: locationInView.y - 4, width: 8, height: 8))
-                
-                predictedDrawPath.appendPath(circle)
+                predictedDrawPath.appendPath(ViewController.createCircleAtPoint(locationInView, radius: 4))
             }
             
             predictedDrawLayer.path = predictedDrawPath.CGPath
@@ -119,27 +130,38 @@ class ViewController: UIViewController {
         
         var foo = Double(1)
         
-        for bar in 0 ... 2_000_000
+        for bar in 0 ... 1_000_000
         {
             foo += sqrt(Double(bar))
         }
+    }
+    
+    static func createCircleAtPoint(origin: CGPoint, radius: CGFloat) -> UIBezierPath
+    {
+        let boundingRect = CGRect(x: origin.x - radius,
+            y: origin.y - radius,
+            width: radius * 2,
+            height: radius * 2)
+        
+        let circle = UIBezierPath(ovalInRect: boundingRect)
+        
+        return circle
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?)
     {
         super.touchesEnded(touches, withEvent: event)
         
-        mainDrawPath.removeAllPoints()
-        coalescedDrawPath.removeAllPoints()
-        predictedDrawPath.removeAllPoints()
-        
-        coalescedDrawLayer.path = coalescedDrawPath.CGPath
-        mainDrawLayer.path = mainDrawPath.CGPath
-        predictedDrawLayer.path = predictedDrawPath.CGPath
-        
-        coalescedDrawLayer.hidden = true
-        mainDrawLayer.hidden = true
-        predictedDrawLayer.hidden = true
+        for (path, layer) in [
+            (mainDrawPath, mainDrawLayer),
+            (coalescedDrawPath, coalescedDrawLayer),
+            (predictedDrawPath, predictedDrawLayer)]
+        {
+            path.removeAllPoints()
+            
+            layer.path = path.CGPath
+            layer.hidden = false
+        }
     }
 
 
