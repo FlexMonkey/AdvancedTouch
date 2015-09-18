@@ -24,7 +24,7 @@ class ViewController: UIViewController {
 
     required init?(coder aDecoder: NSCoder)
     {
-        layers = [coalescedDrawLayer, mainDrawLayer, predictedDrawLayer]
+        layers = [mainDrawLayer, coalescedDrawLayer, predictedDrawLayer]
         paths = [mainDrawPath, coalescedDrawPath, predictedDrawPath]
         
         super.init(coder: aDecoder)
@@ -56,9 +56,9 @@ class ViewController: UIViewController {
 
         // predictedDrawLayer
         
-        predictedDrawLayer.strokeColor = UIColor(white: 1, alpha: 0.95).CGColor
+        predictedDrawLayer.strokeColor = UIColor.whiteColor().CGColor
         predictedDrawLayer.lineWidth = 1
-        predictedDrawLayer.fillColor = UIColor(white: 1, alpha: 0.75).CGColor
+        predictedDrawLayer.fillColor = UIColor.whiteColor().CGColor
     }
 
 
@@ -129,7 +129,10 @@ class ViewController: UIViewController {
             {
                 let locationInView =  predictedTouch.locationInView(view)
                 
-                predictedDrawPath.appendPath(ViewController.createCircleAtPoint(locationInView, radius: 4))
+                predictedDrawPath.moveToPoint(touch.locationInView(view))
+                predictedDrawPath.addLineToPoint(locationInView)
+                
+                predictedDrawPath.appendPath(ViewController.createCircleAtPoint(locationInView, radius: 1))
             }
             
             predictedDrawLayer.path = predictedDrawPath.CGPath
@@ -139,7 +142,7 @@ class ViewController: UIViewController {
         
         var foo = Double(1)
         
-        for bar in 0 ... 1_000_000
+        for bar in 0 ... 5_000_000
         {
             foo += sqrt(Double(bar))
         }
