@@ -19,6 +19,17 @@ class ViewController: UIViewController {
     let predictedDrawLayer = CAShapeLayer()
     let predictedDrawPath = UIBezierPath()
     
+    let layers: [CAShapeLayer]
+    let paths: [UIBezierPath]
+
+    required init?(coder aDecoder: NSCoder)
+    {
+        layers = [coalescedDrawLayer, mainDrawLayer, predictedDrawLayer]
+        paths = [mainDrawPath, coalescedDrawPath, predictedDrawPath]
+        
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -64,12 +75,12 @@ class ViewController: UIViewController {
         
         let locationInView = touch.locationInView(view)
         
-        for path in [mainDrawPath, coalescedDrawPath, predictedDrawPath]
+        for path in paths
         {
             path.moveToPoint(locationInView)
         }
         
-        for layer in [coalescedDrawLayer, mainDrawLayer, predictedDrawLayer]
+        for layer in layers
         {
             layer.hidden = false
         }
@@ -130,7 +141,7 @@ class ViewController: UIViewController {
         
         var foo = Double(1)
         
-        for bar in 0 ... 1_000_000
+        for bar in 0 ... 20_000_000
         {
             foo += sqrt(Double(bar))
         }
@@ -152,10 +163,7 @@ class ViewController: UIViewController {
     {
         super.touchesEnded(touches, withEvent: event)
         
-        for (path, layer) in [
-            (mainDrawPath, mainDrawLayer),
-            (coalescedDrawPath, coalescedDrawLayer),
-            (predictedDrawPath, predictedDrawLayer)]
+        for (path, layer) in zip(paths, layers)
         {
             path.removeAllPoints()
             
