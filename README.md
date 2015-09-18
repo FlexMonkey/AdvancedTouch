@@ -3,6 +3,8 @@
 
 *Companion project to http://flexmonkey.blogspot.co.uk/2015/09/advanced-touch-handling-in-ios9.html*
 
+![screenshot](AdvancedTouch/assets/screenshot.jpg)
+
 With the introduction of the iPad Pro, low latency, high resolution touch handling has become more important than ever. Even if your app runs smoothly at 60 frames per second, high-end iOS devices have a touch scan rate of 120 hertz and with the standard out-of-the-box touch handling, you could easily miss half of your user’s touch movements.
 
 Luckily, with iOS 9, Apple have introduced some new functionality to `UIEvent` to reduce touch latency and improve temporal resolution. There's a demo application to go with with post that you can find at my GitHub repository here.
