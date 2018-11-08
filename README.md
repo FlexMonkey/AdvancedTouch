@@ -87,7 +87,7 @@ If you run this app on your iOS 9 device and scribble away you can see the two r
 
 Something maybe even cleverer is touch prediction which allows you to preempt where a user’s finger (or Apple Pencil) may be in the near future. Predictive touch uses some highly tuned algorithms and is continually updated with where iOS expects the users touch to be in approximately a frame in the future. This means you could begin preparing user interface components (e.g. beginning a fade or instantiating some objects) before they’re actually required to help reduce latency.
 
-In my demo application, I display the predicted touch as small white spots with “tails” that originate for their predicting touch. The syntax is not dissimilar to that of coalesced touch: the event has a new method, `predictedTouchesForTouch()`, which returns an an array of `UITouch`:
+In my demo application, I display the predicted touch as small white spots with “tails” that originate for their predicting touch. The syntax is not dissimilar to that of coalesced touch: the event has a new method, `predictedTouchesForTouch()`, which returns an array of `UITouch`:
 
         [...]
         if let predictedTouches = event.predictedTouchesForTouch(touch)
