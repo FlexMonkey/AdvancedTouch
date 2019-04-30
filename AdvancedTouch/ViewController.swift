@@ -59,38 +59,32 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
-        for (path, layer) in zip(paths, layers)
-        {
+        for (path, layer) in zip(paths, layers) {
             path.removeAllPoints()
             
             layer.path = path.cgPath
             layer.isHidden = false
         }
         
-        guard let touch = touches.first else
-        {
+        guard let touch = touches.first else {
             return
         }
         
         let locationInView = touch.location(in: view)
         
-        for path in paths
-        {
+        for path in paths {
             path.move(to: locationInView)
         }
         
-        for layer in layers
-        {
+        for layer in layers {
             layer.isHidden = false
         }
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
-    {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
         
-        guard let touch = touches.first, let event = event else
-        {
+        guard let touch = touches.first, let event = event else {
             return
         }
         
@@ -134,27 +128,20 @@ class ViewController: UIViewController {
         }
         
         // stupid synchronous calculation
-        
         var foo = Double(1)
         
-        for bar in 0 ... 4_000_000
-        {
+        for bar in 0 ... 4_000_000 {
             foo += sqrt(Double(bar))
         }
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
-    {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        
-      
     }
 }
 
-extension UIBezierPath
-{
-    static func createCircleAtPoint(origin: CGPoint, radius: CGFloat) -> UIBezierPath
-    {
+extension UIBezierPath {
+    static func createCircleAtPoint(origin: CGPoint, radius: CGFloat) -> UIBezierPath {
         let boundingRect = CGRect(x: origin.x - radius,
             y: origin.y - radius,
             width: radius * 2,
@@ -165,4 +152,3 @@ extension UIBezierPath
         return circle
     }
 }
-
